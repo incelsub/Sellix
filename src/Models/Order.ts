@@ -132,8 +132,8 @@ export class Order {
         Object.assign(this, Data)
     }
 
-    // Retrieves an Order by Uniqid.
-    static async getByID(id: number){
+    // Retrieves an Order by Uniqid or Invoice ID.
+    static async getByID(id: number | string){
         // Convert
         const response = JSON.parse(await Sellix.HttpClient.get(`orders/${id}`).body)
         const order = new Order(response)
@@ -141,7 +141,7 @@ export class Order {
         //
         return order
     }
-
+    
     // Returns a list of all the Order. The order are sorted by creation date, with the most recently created order being first. Product objects and additional info are not shown in the list endpoint.
     static async getAll(page?: number){
         // Get the orders
